@@ -1,0 +1,627 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kick-Off — Overload</title>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="header">
+  <div class="logo-box">
+    <span class="logo-badge">OVERLOAD</span>
+    <span class="logo-label">KICK-OFF</span>
+  </div>
+  <div class="progress-wrap">
+    <span class="progress-label" id="progressLabel">ETAPA 1 DE 6</span>
+    <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+  </div>
+</header>
+
+<!-- MAIN -->
+<main class="main">
+<form id="kickoff-form" action="http://localhost:3000/kickoff" method="POST" novalidate>
+
+  <!-- ════════════════════════════
+       ETAPA 1 — SOBRE VOCÊ
+  ════════════════════════════ -->
+  <div class="step active" data-step="1">
+    <div class="step-tag">Etapa 01 / 07</div>
+    <h1 class="step-title">Vamos começar <span>por você.</span></h1>
+    <p class="step-subtitle">Sente-se, fique confortável, pegue um café e vamos lá! Este questionário é essencial para o sucesso do nosso projeto juntos.</p>
+
+    <div class="field">
+      <label>Seu nome completo <span class="req">*</span></label>
+      <input type="text" name="nome_completo" placeholder="Como você prefere ser chamado(a)?">
+    </div>
+    <div class="two-col">
+      <div class="field">
+        <label>Data de aniversário <span class="req">*</span></label>
+        <input type="date" name="data_aniversario">
+      </div>
+      <div class="field">
+        <label>Sua posição na empresa <span class="req">*</span></label>
+        <input type="text" name="cargo" placeholder="Ex: CEO, Sócio, Diretor...">
+      </div>
+    </div>
+    <div class="field">
+      <label>O que te fez escolher a Overload? Quais suas expectativas? <span class="req">*</span></label>
+      <textarea name="expectativas" placeholder="Conta pra gente o que te trouxe até aqui e o que você espera do projeto..."></textarea>
+    </div>
+    <div class="field">
+      <label>Mais alguém fará parte do dia a dia do projeto?</label>
+      <textarea name="outros_envolvidos" placeholder="Nome e função de cada pessoa envolvida..." style="min-height:80px"></textarea>
+    </div>
+
+    <div class="nav-row">
+      <div class="step-dots" id="dots1"></div>
+      <button class="btn btn-primary" onclick="goTo(2)">Próximo &rarr;</button>
+    </div>
+  </div>
+
+  <!-- ════════════════════════════
+       ETAPA 2 — SOBRE A EMPRESA
+  ════════════════════════════ -->
+  <div class="step" data-step="2">
+    <div class="step-tag">Etapa 02 / 07</div>
+    <h1 class="step-title">Agora sobre a <span>sua empresa.</span></h1>
+    <p class="step-subtitle">Quanto mais detalhes você compartilhar, melhor nossa estratégia será construída.</p>
+
+    <div class="two-col">
+      <div class="field">
+        <label>Nome da empresa <span class="req">*</span></label>
+        <input type="text" name="nome_empresa" placeholder="Razão social ou nome fantasia">
+      </div>
+      <div class="field">
+        <label>Onde a empresa foi criada? <span class="req">*</span></label>
+        <input type="text" name="cidade_empresa" placeholder="Cidade / Estado">
+      </div>
+    </div>
+    <div class="two-col">
+      <div class="field">
+        <label>Há quanto tempo no mercado? <span class="req">*</span></label>
+        <input type="text" name="tempo_mercado" placeholder="Ex: 3 anos e meio">
+      </div>
+      <div class="field">
+        <label>Momento atual da empresa <span class="req">*</span></label>
+        <select name="momento_negocio">
+          <option value="" disabled selected>Selecione...</option>
+          <option>Início / Estruturação</option>
+          <option>Crescimento</option>
+          <option>Estável</option>
+          <option>Escala</option>
+          <option>Reestruturação</option>
+        </select>
+      </div>
+    </div>
+    <div class="field">
+      <label>Missão, visão e valores <span class="req">*</span></label>
+      <textarea name="missao_visao" placeholder="Descreva as diretrizes que guiam o negócio..."></textarea>
+    </div>
+    <div class="field">
+      <label>Em poucas palavras, defina sua empresa e a solução que ela entrega <span class="req">*</span></label>
+      <textarea name="definicao_empresa" placeholder="Qual problema você resolve? Para quem?"></textarea>
+    </div>
+    <div class="field">
+      <label>Metas de performance em marketing e vendas <span class="req">*</span></label>
+      <textarea name="metas_performance" placeholder="Descreva suas metas: faturamento, leads, conversão, etc."></textarea>
+    </div>
+
+    <div class="section-divider">
+      <div class="section-divider-line"></div>
+      <span class="section-divider-label">Histórico financeiro</span>
+      <div class="section-divider-line"></div>
+    </div>
+
+    <div class="field">
+      <label>Faturamento dos últimos 6 meses <span class="req">*</span></label>
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:4px">
+        <div><label style="font-size:9px;margin-bottom:6px;letter-spacing:1px;color:var(--muted)">MÊS 1</label><input type="text" name="fat_mes1" placeholder="R$ 0,00"></div>
+        <div><label style="font-size:9px;margin-bottom:6px;letter-spacing:1px;color:var(--muted)">MÊS 2</label><input type="text" name="fat_mes2" placeholder="R$ 0,00"></div>
+        <div><label style="font-size:9px;margin-bottom:6px;letter-spacing:1px;color:var(--muted)">MÊS 3</label><input type="text" name="fat_mes3" placeholder="R$ 0,00"></div>
+        <div><label style="font-size:9px;margin-bottom:6px;letter-spacing:1px;color:var(--muted)">MÊS 4</label><input type="text" name="fat_mes4" placeholder="R$ 0,00"></div>
+        <div><label style="font-size:9px;margin-bottom:6px;letter-spacing:1px;color:var(--muted)">MÊS 5</label><input type="text" name="fat_mes5" placeholder="R$ 0,00"></div>
+        <div><label style="font-size:9px;margin-bottom:6px;letter-spacing:1px;color:var(--muted)">MÊS 6</label><input type="text" name="fat_mes6" placeholder="R$ 0,00"></div>
+      </div>
+    </div>
+
+    <div class="section-divider">
+      <div class="section-divider-line"></div>
+      <span class="section-divider-label">Presença digital</span>
+      <div class="section-divider-line"></div>
+    </div>
+
+    <div class="field">
+      <label>Ferramentas digitais que você já possui <span class="req">*</span></label>
+      <div class="options-grid">
+        <div class="opt-item"><input type="checkbox" name="ferramentas_digitais" id="d1" value="Instagram"><label class="opt-label" for="d1">Instagram</label></div>
+        <div class="opt-item"><input type="checkbox" name="ferramentas_digitais" id="d2" value="Facebook"><label class="opt-label" for="d2">Facebook</label></div>
+        <div class="opt-item"><input type="checkbox" name="ferramentas_digitais" id="d3" value="Gerenciador de Anuncios"><label class="opt-label" for="d3">Gerenciador de Anúncios</label></div>
+        <div class="opt-item"><input type="checkbox" name="ferramentas_digitais" id="d4" value="Website"><label class="opt-label" for="d4">Website / Landing Page</label></div>
+        <div class="opt-item"><input type="checkbox" name="ferramentas_digitais" id="d5" value="Google Meu Negocio"><label class="opt-label" for="d5">Google Meu Negócio</label></div>
+        <div class="opt-item"><input type="checkbox" name="ferramentas_digitais" id="d6" value="YouTube"><label class="opt-label" for="d6">YouTube</label></div>
+        <div class="opt-item"><input type="checkbox" name="ferramentas_digitais" id="d7" value="TikTok"><label class="opt-label" for="d7">TikTok</label></div>
+        <div class="opt-item"><input type="checkbox" name="ferramentas_digitais" id="d8" value="LinkedIn"><label class="opt-label" for="d8">LinkedIn</label></div>
+        <div class="opt-item"><input type="checkbox" name="ferramentas_digitais" id="d9" value="CRM"><label class="opt-label" for="d9">CRM</label></div>
+        <div class="opt-item"><input type="checkbox" name="ferramentas_digitais" id="d10" value="Outros"><label class="opt-label" for="d10">Outros</label></div>
+      </div>
+    </div>
+    <div class="field">
+      <label>Link do site (se houver)</label>
+      <input type="url" name="link_site" placeholder="https://seusite.com.br">
+    </div>
+
+    <div class="nav-row">
+      <div class="step-dots" id="dots2"></div>
+      <div style="display:flex;gap:12px">
+        <button class="btn btn-ghost" onclick="goTo(1)">&larr; Voltar</button>
+        <button class="btn btn-primary" onclick="goTo(3)">Próximo &rarr;</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ════════════════════════════
+       ETAPA 3 — SWOT + PRODUTOS
+  ════════════════════════════ -->
+  <div class="step" data-step="3">
+    <div class="step-tag">Etapa 03 / 07</div>
+    <h1 class="step-title">Matriz <span>S.W.O.T</span> e produtos.</h1>
+    <p class="step-subtitle">Ajuda-nos a entender profundamente o seu negócio. Preencha com o máximo de detalhes.</p>
+
+    <div class="swot-grid">
+      <div class="swot-card forcas">
+        <div class="swot-type">Fator Interno</div>
+        <div class="swot-name">Forças</div>
+        <div class="swot-desc">Vantagens competitivas considerando produto, serviços, pessoal e diferenciais</div>
+        <textarea name="swot_forcas" placeholder="O que você faz melhor que o concorrente?"></textarea>
+      </div>
+      <div class="swot-card fraquezas">
+        <div class="swot-type">Fator Interno</div>
+        <div class="swot-name">Fraquezas</div>
+        <div class="swot-desc">Desvantagens em relação aos concorrentes que podem gerar prejuízos</div>
+        <textarea name="swot_fraquezas" placeholder="O que pode te prejudicar internamente?"></textarea>
+      </div>
+      <div class="swot-card oport">
+        <div class="swot-type">Fator Externo</div>
+        <div class="swot-name">Oportunidades</div>
+        <div class="swot-desc">Possibilidades de atuação com potencial de ganhos no mercado</div>
+        <textarea name="swot_oportunidades" placeholder="O que o mercado oferece a seu favor?"></textarea>
+      </div>
+      <div class="swot-card ameacas">
+        <div class="swot-type">Fator Externo</div>
+        <div class="swot-name">Ameaças</div>
+        <div class="swot-desc">Fatores externos que podem prejudicar o seu negócio</div>
+        <textarea name="swot_ameacas" placeholder="O que no mercado pode te atrapalhar?"></textarea>
+      </div>
+    </div>
+
+    <div class="section-divider">
+      <div class="section-divider-line"></div>
+      <span class="section-divider-label">Produtos &amp; Serviços</span>
+      <div class="section-divider-line"></div>
+    </div>
+
+    <div class="field">
+      <label>Quais produtos e/ou serviços sua empresa oferece? <span class="req">*</span></label>
+      <textarea name="produtos_servicos" placeholder="Liste os principais produtos/serviços com uma breve descrição de cada..."></textarea>
+    </div>
+    <div class="two-col">
+      <div class="field">
+        <label>Qual o seu ticket médio atual? <span class="req">*</span></label>
+        <input type="text" name="ticket_medio" placeholder="Ex: R$ 1.500">
+      </div>
+      <div class="field">
+        <label>Existe recorrência na compra? <span class="req">*</span></label>
+        <input type="text" name="recorrencia" placeholder="Ex: Mensal, a cada 6 meses, não há...">
+      </div>
+    </div>
+    <div class="field">
+      <label>Quais dores o seu produto/serviço resolve? <span class="req">*</span></label>
+      <textarea name="dores_produto" placeholder="Descreva como se estivesse vendendo para um cliente..."></textarea>
+    </div>
+    <div class="field">
+      <label>Histórico de ofertas validadas</label>
+      <textarea name="ofertas_validadas" placeholder="Quais campanhas ou ofertas já funcionaram bem? Descreva os resultados..." style="min-height:80px"></textarea>
+    </div>
+    <div class="field">
+      <label>Quais são seus principais concorrentes? <span class="req">*</span></label>
+      <textarea name="concorrentes" placeholder="Liste os principais concorrentes e o que eles fazem de diferente..." style="min-height:80px"></textarea>
+    </div>
+
+    <div class="nav-row">
+      <div class="step-dots" id="dots3"></div>
+      <div style="display:flex;gap:12px">
+        <button class="btn btn-ghost" onclick="goTo(2)">&larr; Voltar</button>
+        <button class="btn btn-primary" onclick="goTo(4)">Próximo &rarr;</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ════════════════════════════
+       ETAPA 4 — PROCESSO COMERCIAL
+  ════════════════════════════ -->
+  <div class="step" data-step="4">
+    <div class="step-tag">Etapa 04 / 07</div>
+    <h1 class="step-title">Processo <span>comercial.</span></h1>
+    <p class="step-subtitle">Marketing sem comercial forte é dinheiro jogado fora. Vamos entender como funciona sua operação de vendas.</p>
+
+    <div class="field">
+      <label>Como funciona seu processo de vendas atualmente? <span class="req">*</span></label>
+      <textarea name="processo_vendas" placeholder="Descreva o caminho do lead desde o primeiro contato até a compra..."></textarea>
+    </div>
+    <div class="field">
+      <label>Estrutura do time comercial <span class="req">*</span></label>
+      <textarea name="time_comercial" placeholder="Quantas pessoas, quais as funções? (Ex: 2 SDRs, 1 Closer, 1 CS...)" style="min-height:80px"></textarea>
+    </div>
+    <div class="field">
+      <label>Quanto tempo leva, em média, para um lead comprar? <span class="req">*</span></label>
+      <input type="text" name="tempo_decisao_lead" placeholder="Ex: 3 dias, 2 semanas, 30 dias...">
+    </div>
+
+    <div class="section-divider">
+      <div class="section-divider-line"></div>
+      <span class="section-divider-label">Maturidade comercial</span>
+      <div class="section-divider-line"></div>
+    </div>
+
+    <div class="field">
+      <label>Nota de maturidade comercial do time (1 a 10) <span class="req">*</span></label>
+      <div class="options-grid rating-row">
+        <div class="opt-item"><input type="radio" name="mat" id="m1"><label class="opt-label" for="m1">1</label></div>
+        <div class="opt-item"><input type="radio" name="mat" id="m2"><label class="opt-label" for="m2">2</label></div>
+        <div class="opt-item"><input type="radio" name="mat" id="m3"><label class="opt-label" for="m3">3</label></div>
+        <div class="opt-item"><input type="radio" name="mat" id="m4"><label class="opt-label" for="m4">4</label></div>
+        <div class="opt-item"><input type="radio" name="mat" id="m5"><label class="opt-label" for="m5">5</label></div>
+        <div class="opt-item"><input type="radio" name="mat" id="m6"><label class="opt-label" for="m6">6</label></div>
+        <div class="opt-item"><input type="radio" name="mat" id="m7"><label class="opt-label" for="m7">7</label></div>
+        <div class="opt-item"><input type="radio" name="mat" id="m8"><label class="opt-label" for="m8">8</label></div>
+        <div class="opt-item"><input type="radio" name="mat" id="m9"><label class="opt-label" for="m9">9</label></div>
+        <div class="opt-item"><input type="radio" name="mat" id="m10"><label class="opt-label" for="m10">10</label></div>
+      </div>
+    </div>
+    <div class="field">
+      <label>Fazem acompanhamento de métricas comerciais com relatório?</label>
+      <div class="options-grid">
+        <div class="opt-item"><input type="radio" name="rel" id="r1"><label class="opt-label" for="r1">Sim, regularmente</label></div>
+        <div class="opt-item"><input type="radio" name="rel" id="r2"><label class="opt-label" for="r2">Às vezes</label></div>
+        <div class="opt-item"><input type="radio" name="rel" id="r3"><label class="opt-label" for="r3">Não ainda</label></div>
+      </div>
+    </div>
+    <div class="field">
+      <label>Link do relatório/dashboard (se houver)</label>
+      <input type="url" name="link_persona" placeholder="https://...">
+    </div>
+    <div class="field">
+      <label>Quais os critérios de um lead qualificado? (cite pelo menos 3) <span class="req">*</span></label>
+      <textarea name="criterios_lead" placeholder="Ex: Empresa com +10 funcionários, ticket acima de R$2k, interesse declarado..." style="min-height:80px"></textarea>
+    </div>
+
+    <div class="nav-row">
+      <div class="step-dots" id="dots4"></div>
+      <div style="display:flex;gap:12px">
+        <button class="btn btn-ghost" onclick="goTo(3)">&larr; Voltar</button>
+        <button class="btn btn-primary" onclick="goTo(5)">Próximo &rarr;</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ════════════════════════════
+       ETAPA 5 — PÚBLICO
+  ════════════════════════════ -->
+  <div class="step" data-step="5">
+    <div class="step-tag">Etapa 05 / 07</div>
+    <h1 class="step-title">Agora sobre o <span>seu público.</span></h1>
+    <p class="step-subtitle">Quem compra de você? Quanto mais você conhecer seu cliente ideal, mais certeira será a estratégia.</p>
+
+    <div class="info-card">
+      Se você já possui uma persona definida, cole o link abaixo e pule as perguntas seguintes.
+    </div>
+    <div class="field">
+      <label>Link da persona (se já existir)</label>
+      <input type="url" name="link_relatorio" placeholder="https://...">
+    </div>
+
+    <div class="two-col">
+      <div class="field">
+        <label>Faixa etária predominante <span class="req">*</span></label>
+        <input type="text" name="faixa_etaria" placeholder="Ex: 30 a 45 anos">
+      </div>
+      <div class="field">
+        <label>Região de atuação <span class="req">*</span></label>
+        <input type="text" name="regiao_atuacao" placeholder="Ex: Espírito Santo, Sul do Brasil...">
+      </div>
+    </div>
+    <div class="field">
+      <label>Classe social predominante <span class="req">*</span></label>
+      <div class="options-grid">
+        <div class="opt-item"><input type="radio" name="cls" id="ca"><label class="opt-label" for="ca">Classe A</label></div>
+        <div class="opt-item"><input type="radio" name="cls" id="cb"><label class="opt-label" for="cb">Classe B</label></div>
+        <div class="opt-item"><input type="radio" name="cls" id="cc"><label class="opt-label" for="cc">Classe C</label></div>
+        <div class="opt-item"><input type="radio" name="cls" id="cd"><label class="opt-label" for="cd">Classe D</label></div>
+        <div class="opt-item"><input type="radio" name="cls" id="ce"><label class="opt-label" for="ce">Classe E</label></div>
+      </div>
+    </div>
+    <div class="field">
+      <label>Gênero predominante <span class="req">*</span></label>
+      <div class="options-grid">
+        <div class="opt-item"><input type="radio" name="gen" id="gm"><label class="opt-label" for="gm">Homens</label></div>
+        <div class="opt-item"><input type="radio" name="gen" id="gf"><label class="opt-label" for="gf">Mulheres</label></div>
+        <div class="opt-item"><input type="radio" name="gen" id="ga"><label class="opt-label" for="ga">Ambos igualmente</label></div>
+        <div class="opt-item"><input type="radio" name="gen" id="gl"><label class="opt-label" for="gl">LGBTQIAPN+</label></div>
+      </div>
+    </div>
+    <div class="field">
+      <label>Como seu público busca pela sua solução? Quais canais usa? <span class="req">*</span></label>
+      <div class="options-grid">
+        <div class="opt-item"><input type="checkbox" name="canais_publico" id="c1" value="Instagram"><label class="opt-label" for="c1">Instagram</label></div>
+        <div class="opt-item"><input type="checkbox" name="canais_publico" id="c2" value="Facebook"><label class="opt-label" for="c2">Facebook</label></div>
+        <div class="opt-item"><input type="checkbox" name="canais_publico" id="c3" value="Google"><label class="opt-label" for="c3">Google</label></div>
+        <div class="opt-item"><input type="checkbox" name="canais_publico" id="c4" value="YouTube"><label class="opt-label" for="c4">YouTube</label></div>
+        <div class="opt-item"><input type="checkbox" name="canais_publico" id="c5" value="TikTok"><label class="opt-label" for="c5">TikTok</label></div>
+        <div class="opt-item"><input type="checkbox" name="canais_publico" id="c6" value="LinkedIn"><label class="opt-label" for="c6">LinkedIn</label></div>
+        <div class="opt-item"><input type="checkbox" name="canais_publico" id="c7" value="WhatsApp/Indicacao"><label class="opt-label" for="c7">WhatsApp/Indicação</label></div>
+        <div class="opt-item"><input type="checkbox" name="canais_publico" id="c8" value="Outros"><label class="opt-label" for="c8">Outros</label></div>
+      </div>
+    </div>
+    <div class="field">
+      <label>Principais dores do seu público <span class="req">*</span></label>
+      <textarea name="dores_publico" placeholder="O que mantém seu cliente acordado às 3h da manhã? Quais problemas ele precisa resolver?"></textarea>
+    </div>
+    <div class="field">
+      <label>O que seu público busca (desejo/necessidade)? <span class="req">*</span></label>
+      <textarea name="desejo_publico" placeholder="Qual é o resultado/transformação que ele quer alcançar?" style="min-height:80px"></textarea>
+    </div>
+    <div class="field">
+      <label>5 principais objeções que impedem a compra <span class="req">*</span></label>
+      <textarea name="objecoes" placeholder="Ex: Preço, formas de pagamento, desconfiança, não vê urgência, medo do resultado..." style="min-height:100px"></textarea>
+    </div>
+
+    <div class="nav-row">
+      <div class="step-dots" id="dots5"></div>
+      <div style="display:flex;gap:12px">
+        <button class="btn btn-ghost" onclick="goTo(4)">&larr; Voltar</button>
+        <button class="btn btn-primary" onclick="goTo(6)">Próximo &rarr;</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ════════════════════════════
+       ETAPA 6 — IDENTIDADE DA MARCA
+  ════════════════════════════ -->
+  <div class="step" data-step="6">
+    <div class="step-tag">Etapa 06 / 07</div>
+    <h1 class="step-title">A personalidade da <span>sua marca.</span></h1>
+    <p class="step-subtitle">A última etapa! Vamos entender a essência visual e comunicacional do seu negócio.</p>
+
+    <div class="two-col">
+      <div class="field">
+        <label>Possui manual de marca / brandbook?</label>
+        <input type="url" name="link_brandbook" placeholder="Cole o link aqui (Google Drive, Notion...)">
+      </div>
+      <div class="field">
+        <label>Possui pasta com fotos/materiais?</label>
+        <input type="url" name="link_fotos" placeholder="Cole o link aqui (Google Drive, Dropbox...)">
+      </div>
+    </div>
+
+    <div class="field">
+      <label>Se sua empresa fosse uma pessoa, como ela seria? <span class="req">*</span></label>
+      <div class="personality-grid">
+        <div class="opt-item"><input type="checkbox" name="personalidade" id="p1" value="Seria"><label class="opt-label" for="p1">Séria</label></div>
+        <div class="opt-item"><input type="checkbox" name="personalidade" id="p2" value="Extrovertida"><label class="opt-label" for="p2">Extrovertida</label></div>
+        <div class="opt-item"><input type="checkbox" name="personalidade" id="p3" value="Alegre"><label class="opt-label" for="p3">Alegre</label></div>
+        <div class="opt-item"><input type="checkbox" name="personalidade" id="p4" value="Brincalhona"><label class="opt-label" for="p4">Brincalhona</label></div>
+        <div class="opt-item"><input type="checkbox" name="personalidade" id="p5" value="Moderna"><label class="opt-label" for="p5">Moderna</label></div>
+        <div class="opt-item"><input type="checkbox" name="personalidade" id="p6" value="Elegante"><label class="opt-label" for="p6">Elegante</label></div>
+        <div class="opt-item"><input type="checkbox" name="personalidade" id="p7" value="Madura"><label class="opt-label" for="p7">Madura</label></div>
+        <div class="opt-item"><input type="checkbox" name="personalidade" id="p8" value="Aventureira"><label class="opt-label" for="p8">Aventureira</label></div>
+        <div class="opt-item"><input type="checkbox" name="personalidade" id="p9" value="Tradicional"><label class="opt-label" for="p9">Tradicional</label></div>
+        <div class="opt-item"><input type="checkbox" name="personalidade" id="p10" value="Energetica"><label class="opt-label" for="p10">Energética</label></div>
+        <div class="opt-item"><input type="checkbox" name="personalidade" id="p11" value="Exclusiva"><label class="opt-label" for="p11">Exclusiva</label></div>
+        <div class="opt-item"><input type="checkbox" name="personalidade" id="p12" value="Criativa"><label class="opt-label" for="p12">Criativa</label></div>
+        <div class="opt-item"><input type="checkbox" name="personalidade" id="p13" value="Confiavel"><label class="opt-label" for="p13">Confiável</label></div>
+        <div class="opt-item"><input type="checkbox" name="personalidade" id="p14" value="Ousada"><label class="opt-label" for="p14">Ousada</label></div>
+        <div class="opt-item"><input type="checkbox" name="personalidade" id="p15" value="Futurista"><label class="opt-label" for="p15">Futurista</label></div>
+        <div class="opt-item"><input type="checkbox" name="personalidade" id="p16" value="Divertida"><label class="opt-label" for="p16">Divertida</label></div>
+        <div class="opt-item"><input type="checkbox" name="personalidade" id="p17" value="Artistica"><label class="opt-label" for="p17">Artística</label></div>
+        <div class="opt-item"><input type="checkbox" name="personalidade" id="p18" value="Romantica"><label class="opt-label" for="p18">Romântica</label></div>
+        <div class="opt-item"><input type="checkbox" name="personalidade" id="p19" value="Nerd"><label class="opt-label" for="p19">Nerd</label></div>
+        <div class="opt-item"><input type="checkbox" name="personalidade" id="p20" value="Rebelde"><label class="opt-label" for="p20">Rebelde</label></div>
+      </div>
+    </div>
+    <div class="field">
+      <label>Características não listadas acima</label>
+      <input type="text" name="personalidade_outros" placeholder="Adicione outras características da sua marca...">
+    </div>
+    <div class="field">
+      <label>Das características citadas, quais são as 3 mais fortes? <span class="req">*</span></label>
+      <input type="text" name="personalidade_top3" placeholder="Ex: Elegante, Confiável, Moderna">
+    </div>
+
+    <div class="two-col">
+      <div class="field">
+        <label>Cores que DEVEM ser usadas</label>
+        <input type="text" name="cores_usar" placeholder="Ex: Azul marinho e dourado">
+      </div>
+      <div class="field">
+        <label>Cores que NÃO devem ser usadas</label>
+        <input type="text" name="cores_nao_usar" placeholder="Ex: Laranja, cores muito vibrantes">
+      </div>
+    </div>
+
+    <div class="field">
+      <label>Referências e inspirações <span class="req">*</span></label>
+      <textarea name="referencias" placeholder="Marcas, campanhas, designers, concorrentes que te inspiram em design, copy ou estratégia..."></textarea>
+    </div>
+    <div class="field">
+      <label>Considerações finais — fique à vontade <span class="req">*</span></label>
+      <textarea name="consideracoes_finais" placeholder="Algo importante que não foi perguntado? Alguma ressalva? Expectativa específica?"></textarea>
+    </div>
+
+    <div class="nav-row">
+      <div class="step-dots" id="dots6"></div>
+      <div style="display:flex;gap:12px">
+        <button class="btn btn-ghost" onclick="goTo(5)">&larr; Voltar</button>
+        <button class="btn btn-primary" onclick="goTo(7)">Próximo &rarr;</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ════════════════════════════
+       ETAPA 7 — ACESSOS
+  ════════════════════════════ -->
+  <div class="step" data-step="7">
+    <div class="step-tag">Etapa 07 / 07</div>
+    <h1 class="step-title">Acessos e <span>credenciais.</span></h1>
+    <p class="step-subtitle">Para configurar suas ferramentas e campanhas, precisamos dos acessos abaixo. Todas as informações são tratadas com total sigilo e segurança.</p>
+
+    <div class="info-card">
+      🔒 Suas credenciais são usadas exclusivamente pela equipe Overload para configurar e operar suas ferramentas. Recomendamos criar senhas específicas para o projeto quando possível.
+    </div>
+
+    <!-- Gmail -->
+    <div class="section-divider">
+      <div class="section-divider-line"></div>
+      <span class="section-divider-label">Gmail</span>
+      <div class="section-divider-line"></div>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-bottom:28px">
+      <div class="field" style="margin:0"><label>E-mail / Login</label><input type="text" name="gmail_login" placeholder="email@gmail.com"></div>
+      <div class="field" style="margin:0"><label>Senha</label><input type="text" name="gmail_senha" placeholder="••••••••"></div>
+      <div class="field" style="margin:0"><label>Link / URL</label><input type="url" name="gmail_url" placeholder="https://mail.google.com"></div>
+    </div>
+
+    <!-- Instagram -->
+    <div class="section-divider">
+      <div class="section-divider-line"></div>
+      <span class="section-divider-label">Instagram</span>
+      <div class="section-divider-line"></div>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-bottom:28px">
+      <div class="field" style="margin:0"><label>Usuário</label><input type="text" name="ig_usuario" placeholder="@usuario"></div>
+      <div class="field" style="margin:0"><label>Senha</label><input type="text" name="ig_senha" placeholder="••••••••"></div>
+      <div class="field" style="margin:0"><label>Link do perfil</label><input type="url" name="ig_url" placeholder="https://instagram.com/..."></div>
+    </div>
+
+    <!-- Facebook -->
+    <div class="section-divider">
+      <div class="section-divider-line"></div>
+      <span class="section-divider-label">Facebook / Meta Business</span>
+      <div class="section-divider-line"></div>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-bottom:28px">
+      <div class="field" style="margin:0"><label>E-mail / Login</label><input type="text" name="fb_login" placeholder="email@dominio.com"></div>
+      <div class="field" style="margin:0"><label>Senha</label><input type="text" name="fb_senha" placeholder="••••••••"></div>
+      <div class="field" style="margin:0"><label>Link da página</label><input type="url" name="fb_url" placeholder="https://facebook.com/..."></div>
+    </div>
+
+    <!-- TikTok -->
+    <div class="section-divider">
+      <div class="section-divider-line"></div>
+      <span class="section-divider-label">TikTok</span>
+      <div class="section-divider-line"></div>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-bottom:28px">
+      <div class="field" style="margin:0"><label>Usuário / E-mail</label><input type="text" name="tt_usuario" placeholder="@usuario"></div>
+      <div class="field" style="margin:0"><label>Senha</label><input type="text" name="tt_senha" placeholder="••••••••"></div>
+      <div class="field" style="margin:0"><label>Link do perfil</label><input type="url" name="tt_url" placeholder="https://tiktok.com/@..."></div>
+    </div>
+
+    <!-- WordPress -->
+    <div class="section-divider">
+      <div class="section-divider-line"></div>
+      <span class="section-divider-label">WordPress</span>
+      <div class="section-divider-line"></div>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-bottom:28px">
+      <div class="field" style="margin:0"><label>Usuário / E-mail</label><input type="text" name="wp_usuario" placeholder="admin"></div>
+      <div class="field" style="margin:0"><label>Senha</label><input type="text" name="wp_senha" placeholder="••••••••"></div>
+      <div class="field" style="margin:0"><label>URL do painel</label><input type="url" name="wp_url" placeholder="https://seusite.com/wp-admin"></div>
+    </div>
+
+    <!-- Hospedagem -->
+    <div class="section-divider">
+      <div class="section-divider-line"></div>
+      <span class="section-divider-label">Hospedagem</span>
+      <div class="section-divider-line"></div>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-bottom:28px">
+      <div class="field" style="margin:0"><label>Usuário / E-mail</label><input type="text" name="host_login" placeholder="usuario@hosting.com"></div>
+      <div class="field" style="margin:0"><label>Senha</label><input type="text" name="host_senha" placeholder="••••••••"></div>
+      <div class="field" style="margin:0"><label>URL / Painel</label><input type="url" name="host_url" placeholder="https://painel.hospedagem.com"></div>
+    </div>
+    <div class="field">
+      <label>Provedor de hospedagem</label>
+      <input type="text" name="host_provedor" placeholder="Ex: Hostgator, Locaweb, Cloudflare, AWS...">
+    </div>
+
+    <!-- E-commerce -->
+    <div class="section-divider">
+      <div class="section-divider-line"></div>
+      <span class="section-divider-label">Plataforma E-commerce</span>
+      <div class="section-divider-line"></div>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-bottom:12px">
+      <div class="field" style="margin:0"><label>Usuário / E-mail</label><input type="text" name="ecomm_login" placeholder="admin@loja.com"></div>
+      <div class="field" style="margin:0"><label>Senha</label><input type="text" name="ecomm_senha" placeholder="••••••••"></div>
+      <div class="field" style="margin:0"><label>URL do painel</label><input type="url" name="ecomm_url" placeholder="https://..."></div>
+    </div>
+    <div class="field">
+      <label>Plataforma utilizada</label>
+      <input type="text" name="ecomm_plataforma" placeholder="Ex: Shopify, VTEX, Nuvemshop, WooCommerce, Tray...">
+    </div>
+
+    <!-- CRM -->
+    <div class="section-divider">
+      <div class="section-divider-line"></div>
+      <span class="section-divider-label">CRM</span>
+      <div class="section-divider-line"></div>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-bottom:12px">
+      <div class="field" style="margin:0"><label>Usuário / E-mail</label><input type="text" name="crm_login" placeholder="usuario@crm.com"></div>
+      <div class="field" style="margin:0"><label>Senha</label><input type="text" name="crm_senha" placeholder="••••••••"></div>
+      <div class="field" style="margin:0"><label>URL / Painel</label><input type="url" name="crm_url" placeholder="https://..."></div>
+    </div>
+    <div class="field">
+      <label>CRM utilizado</label>
+      <input type="text" name="crm_plataforma" placeholder="Ex: RD Station, HubSpot, Pipedrive, GHL, Salesforce...">
+    </div>
+
+    <div class="field" style="margin-top:8px">
+      <label>Outros acessos importantes</label>
+      <textarea name="outros_acessos" placeholder="Ferramentas adicionais, logins de anúncios (Google Ads, Meta Ads), ferramentas de automação, etc." style="min-height:80px"></textarea>
+    </div>
+
+    <div class="nav-row">
+      <div class="step-dots" id="dots7"></div>
+      <div style="display:flex;gap:12px">
+        <button class="btn btn-ghost" onclick="goTo(6)">&larr; Voltar</button>
+        <button class="btn btn-submit" onclick="submitForm()">Enviar agora &#10003;</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ════════════════════════════
+       SUCESSO
+  ════════════════════════════ -->
+  <div class="success-screen" id="successScreen">
+    <div class="success-icon">✓</div>
+    <h1 class="step-title" style="margin-bottom:16px">Kick-Off <span>enviado!</span></h1>
+    <p class="step-subtitle" style="max-width:480px;margin:0 auto 32px">
+      Recebemos todas as informações. Nosso time vai analisar cada detalhe e entraremos em contato em breve para dar início à estratégia.
+    </p>
+    <div style="margin-top:24px;font-size:12px;color:var(--muted);font-style:italic">
+      "Nós somos a arma estratégica. Você é quem aperta o gatilho."
+    </div>
+  </div>
+
+</form>
+</main>
+
+<script src="script.js"></script>
+<iframe name="hidden-iframe" style="display:none;"></iframe>
+</body>
+</html>

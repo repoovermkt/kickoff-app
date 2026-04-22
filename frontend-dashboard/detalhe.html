@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Detalhes</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<h1>📋 Detalhes</h1>
+
+<div id="content"></div>
+
+<script>
+const id = new URLSearchParams(window.location.search).get('id');
+
+fetch('http://localhost:3000/kickoff/full')
+  .then(res => res.json())
+  .then(data => {
+    const lead = data.find(l => l.id === id);
+
+    document.getElementById('content').innerHTML = `
+      <div class="card">
+        <h3>${lead.nome_completo}</h3>
+        <p><strong>Empresa:</strong> ${lead.nome_empresa}</p>
+        <p><strong>Momento:</strong> ${lead.momento_negocio}</p>
+        <p><strong>Expectativas:</strong> ${lead.expectativas}</p>
+        <p><strong>Dores:</strong> ${lead.dores_publico}</p>
+        <p><strong>Objeções:</strong> ${lead.objecoes}</p>
+      </div>
+    `;
+  });
+</script>
+
+</body>
+</html>

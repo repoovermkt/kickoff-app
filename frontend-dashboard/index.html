@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Dashboard SaaS</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+
+<h1>📊 Dashboard de Leads</h1>
+
+<div class="grid">
+  <div class="card">
+    <div>Total de Leads</div>
+    <div id="total" class="big">0</div>
+  </div>
+
+  <div class="card">
+    <div>Empresas em Escala</div>
+    <div id="escala" class="big">0</div>
+  </div>
+
+  <div class="card">
+    <div>Leads Hoje</div>
+    <div id="hoje" class="big">0</div>
+  </div>
+</div>
+
+<div class="grid">
+  <div class="card">
+    <h3>Leads por Dia</h3>
+    <canvas id="chartLeads"></canvas>
+  </div>
+
+  <div class="card">
+    <h3>Momento do Negócio</h3>
+    <canvas id="chartMomento"></canvas>
+  </div>
+</div>
+
+<div class="card list">
+  <h3>Lista de Leads</h3>
+  <div id="list"></div>
+</div>
+
+<script>
+fetch('http://localhost:3000/kickoff/full')
+  .then(res => res.json())
+  .then(data => {
+
+    // TOTAL
+    document.getElementById('total').innerText = data.length;
+
+    // ESCALA
+    const escala = data.filter(l => l.momento_negocio === 'Escala').length;
+    document.getElementById('escala').innerText = escala;
+
+    // HOJE
+    const hoje = new Date().toDateString();
+    const hojeCount = data.filter(l => new Date(l.created_at).toDateString() === hoje).length;
+    document.getElementById('hoje').innerText = hojeCount;
+
+    // LEADS POR DIA
+    const dias = {};
+    data.forEach(l => {
+      const dia = new Date(l.created_at).toLocaleDateString();
+      dias[dia] = (dias[dia] || 0) + 1;
+    });
+
+    new Chart(document.getElementById('chartLeads'), {
+      type: 'line',
+      data: {
+        labels: Object.keys(dias),
+        datasets: [{
+          label: 'Leads',
+          data: Object.values(dias)
+        }]
+      }
+    });
+
+    // MOMENTO
+    const momentos = {};
+    data.forEach(l => {
+      const m = l.momento_negocio || 'Não definido';
+      momentos[m] = (momentos[m] || 0) + 1;
+    });
+
+    new Chart(document.getElementById('chartMomento'), {
+      type: 'doughnut',
+      data: {
+        labels: Object.keys(momentos),
+        datasets: [{
+          data: Object.values(momentos)
+        }]
+      }
+    });
+
+    // LISTA
+    const list = document.getElementById('list');
+
+    data.forEach(item => {
+      const div = document.createElement('div');
+      div.className = 'card';
+
+      div.innerHTML = `
+        <strong>${item.nome_completo}</strong> - ${item.nome_empresa}
+        <br><br>
+        <button onclick="ver('${item.id}')">Ver detalhes</button>
+      `;
+
+      list.appendChild(div);
+    });
+
+  });
+
+function ver(id) {
+  window.location.href = 'detalhe.html?id=' + id;
+}
+</script>
+
+</body>
+</html>
