@@ -40,7 +40,7 @@
     const formData = new FormData(form);
     const payload = Object.fromEntries(formData.entries());
 
-    const response = await fetch('http://localhost:3000/kickoff', {
+    const response = await fetch('/api', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(payload)

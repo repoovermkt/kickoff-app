@@ -1,0 +1,23 @@
+services:
+  backend:
+    build:
+      context: ./backend
+    container_name: kickoff-backend
+    restart: always
+    env_file:
+      - .env
+    expose:
+      - "3000"
+
+  nginx:
+    image: nginx:alpine
+    container_name: kickoff-nginx
+    restart: always
+    ports:
+      - "80:80"
+    volumes:
+      - ./frontend-form:/usr/share/nginx/html/form
+      - ./frontend-dashboard:/usr/share/nginx/html/dashboard
+      - ./nginx.conf:/etc/nginx/conf.d/default.conf
+    depends_on:
+      - backend
